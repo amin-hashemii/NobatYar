@@ -1,40 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Application\\Application.csproj": {}
+    "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Application\\Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Application\\Application.csproj": {
+    "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\Saraye Tell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Application\\obj\\",
+        "projectPath": "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\m.hashemi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Application\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Saraye Tell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\m.hashemi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://git-neo.hooshmandsepehrco.com/api/v4/projects/19/packages/nuget/index.json": {}
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Domain\\Domain.csproj"
+              "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Domain\\Domain.csproj"
               }
             }
           }
@@ -53,6 +48,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "MediatR": {
@@ -80,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Users\\m.hashemi\\.dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -358,33 +354,28 @@
         }
       }
     },
-    "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Domain\\Domain.csproj": {
+    "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Saraye Tell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Saraye Tell\\RiderProjects\\MyUniPrj\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\m.hashemi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m.hashemi\\RiderProjects\\NobatYar\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Saraye Tell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\m.hashemi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://git-neo.hooshmandsepehrco.com/api/v4/projects/19/packages/nuget/index.json": {}
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -403,6 +394,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.Extensions.Identity.Stores": {
@@ -426,7 +418,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Users\\m.hashemi\\.dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
