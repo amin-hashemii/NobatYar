@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = "Admin")] 
+[Authorize(Policy = "CanManageUsers")] 
 public class AdminController : ControllerBase
 {
    private readonly IAdminService  _adminService;
