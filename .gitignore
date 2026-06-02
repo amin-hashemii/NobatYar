@@ -1,0 +1,48 @@
+## Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS / Rider / VSCode
+.vs/
+.idea/
+.vscode/
+
+## Logs
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## NuGet
+*.nupkg
+packages/
+.nuget/
+
+## Test results / coverage
+TestResults/
+*.trx
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+## Publish
+publish/
+**/publish/
+
+## Environment files
+.env
+.env.*
+
+## Others
+_ReSharper*/
+*.DotSettings.user
