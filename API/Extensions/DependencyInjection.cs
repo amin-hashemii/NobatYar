@@ -16,7 +16,7 @@ public static class DependencyInjection
         services.AddIdentityServices();
         services.AddJwtAuthentication(configuration);
         services.AddAuthorization();
-
+        services.AddAuthorizationPolicies();
         return services;
     }
 
@@ -47,28 +47,46 @@ public static class DependencyInjection
         return services;
     }
 
-    private static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddJwtAuthentication(this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = configuration["Jwt:Issuer"],
-                ValidAudience = configuration["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? string.Empty))
-            };
-        });
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidAudience = configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? string.Empty))
+                };
+            });
 
         return services;
     }
+
+    private static IServiceCollection AddAuthorizationPolicies(this IServiceCollection services)
+                {
+                    services.AddAuthorization(options =>
+                    {
+                        options.AddPolicy("CanManageUsers", policy =>
+                            policy.RequireRole("Admin"));
+        
+                        options.AddPolicy("CanManageAppointments", policy =>
+                            policy.RequireRole("Admin", "Employee"));
+        
+                        options.AddPolicy("EmployeeOnly", policy =>
+                            policy.RequireRole("Employee"));
+                    });
+        
+                    return services;
+                }
 }
