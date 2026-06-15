@@ -3,7 +3,7 @@ using Application.ViewModel;
 using Domain.Model;
 using Microsoft.AspNetCore.Identity;
 
-namespace Infra;
+namespace Infra.Services;
 
 public class IdentityService : IIdentityService 
 {
