@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interface;
+using Application.Configuration.Exceptions;
 using Application.ViewModel;
 using MediatR;
 
@@ -25,7 +26,7 @@ public class ChangeUserRoleCommandHandler:IRequestHandler<ChangeUserRoleCommand,
         var (succeeded, errors) = await _identityService.ChangeUserRoleAsync(input);
 
         if (!succeeded)
-            throw new Exception(string.Join(", ", errors));
+            throw new MyApplicationException(ApplicationErrors.InvalidData,errors);
 
         return true;
     }

@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interface;
+using Application.Configuration.Exceptions;
 using Application.ViewModel;
 using MediatR;
 
@@ -26,9 +27,9 @@ public class CreateRegisterCommandHandler : IRequestHandler<CreateRegisterComman
         };
 
         var (succeeded, errors) = await _identityService.RegisterAsync(dto);
-
-        if (!succeeded)
-            throw new Exception(string.Join(", ", errors));
+        
+       if (!succeeded)
+       throw new MyApplicationException(ApplicationErrors.InvalidData,errors);
 
         return true;
     }

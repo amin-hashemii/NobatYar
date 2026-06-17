@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interface;
+using Application.Configuration.Exceptions;
 using Application.ViewModel;
 using Domain.Model;
 using MediatR;
@@ -27,7 +28,7 @@ public class CreateLoginCommandHandler:IRequestHandler<CreateLoginCommand,LoginV
         var (succeeded, token, userDto) = await _identityService.LoginAsync(input);
 
         if (!succeeded || userDto is null)
-            throw new UnauthorizedAccessException("Invalid username or password");
+            throw new MyApplicationException(ApplicationErrors.InvalidCredentials);
 
         return userDto;
     }
