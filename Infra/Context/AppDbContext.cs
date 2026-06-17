@@ -1,11 +1,13 @@
 ﻿using Domain.Model;
+using Domain.Model.Category;
 using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NetDevPack.Data;
 
 namespace Infra.Context;
 
-public class AppDbContext : IdentityDbContext<ApplicationUser>
+public class AppDbContext : IdentityDbContext<ApplicationUser> , IUnitOfWork
 {
     private readonly IMediator _mediator;
 
@@ -16,6 +18,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     }
 
        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+       public DbSet<Category> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -27,5 +30,10 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         var result = await base.SaveChangesAsync(cancellationToken);
         return result;
+    }
+
+    public async Task<bool> Commit()
+    {
+        return await SaveChangesAsync() > 0;
     }
 }

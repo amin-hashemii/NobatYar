@@ -1,7 +1,9 @@
 ﻿using Application.Common.Interface;
 using Application.Query.Account;
 using Application.Service;
+using Domain.Repository;
 using Infra;
+using Infra.Repository;
 using Infra.Services;
 using MediatR;
 
@@ -20,6 +22,8 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
         return services;
     }
 }
