@@ -1,4 +1,7 @@
-﻿namespace Domain.Model;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+
+namespace Domain.Model;
 
 public class BaseModel <TPrimaryKey> 
 {
