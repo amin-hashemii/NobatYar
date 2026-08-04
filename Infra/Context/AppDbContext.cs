@@ -1,6 +1,7 @@
 ﻿using Domain.Model;
 using Domain.Model.Category;
 using Domain.Model.Provider;
+using Domain.Model.Services;
 using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser> , IUnitOfWork
        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
        public DbSet<Category> Categories { get; set; }
        public DbSet<Provider> Providers { get; set; }
+       public DbSet<Service>  Services { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
