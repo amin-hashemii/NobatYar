@@ -26,6 +26,8 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IProviderService, ProviderService>();
         services.AddScoped<IProviderRepository, ProviderRepository>();
+        services.AddScoped<IServiceService, ServiceService>();
+        services.AddScoped<IServiceRepository, ServiceRepository>();
         return services;
     }
 }

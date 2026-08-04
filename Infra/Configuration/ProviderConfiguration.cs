@@ -17,7 +17,7 @@ public class ProviderConfiguration : IEntityTypeConfiguration<Provider>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(x => x.Category)
-            .WithMany()
+            .WithMany(c => c.Providers)
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
     }
