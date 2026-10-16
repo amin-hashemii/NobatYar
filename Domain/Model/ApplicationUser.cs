@@ -8,5 +8,6 @@ public class ApplicationUser : IdentityUser
     public string LastName { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
+    public ICollection<Appointment.Appointment> Appointments { get; private set; }
     public ICollection<Provider.Provider> Providers { get; set; } = new List<Provider.Provider>();
 }

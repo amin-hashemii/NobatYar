@@ -9,7 +9,9 @@ public class Service : BaseModel<int> , IAggregateRoot
     public string Duration { get; private set; }
     public decimal Price { get; private set; }
     public Provider.Provider provider { get; private set; }
-
+    
+    public ICollection<Appointment.Appointment>  Appointments { get; private set; }
+    
     public Service(int providerId, string title, string duration, decimal price)
     {
         ProviderId = providerId;
