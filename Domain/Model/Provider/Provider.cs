@@ -12,7 +12,7 @@ public class Provider : BaseModel<int> , IAggregateRoot
     
     public virtual ApplicationUser User { get; private set; }
     public virtual Category.Category Category { get; private set; }
-
+     public ICollection<Schedule.Schedule>  Schedules { get; private set; }
 
     public Provider(string userId, int categoryId, string name, string bio, string address)
     {
