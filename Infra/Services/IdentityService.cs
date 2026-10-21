@@ -47,13 +47,27 @@ public class IdentityService : IIdentityService
         };
 
         var result = await _userManager.CreateAsync(user, input.Password);
-        await _userManager.AddToRoleAsync(user, "User");
+
         if (!result.Succeeded)
         {
             return (false, result.Errors.Select(e => e.Description));
         }
 
-      
+        var roleResult = await _userManager.AddToRoleAsync(user, "User");
+
+        if (!result.Succeeded)
+        {
+            var errors = result.Errors
+                .Select(e => $"{e.Code}: {e.Description}")
+                .ToList();
+
+            return (false, errors);
+        }
+        if (!roleResult.Succeeded)
+        {
+            return (false, roleResult.Errors.Select(e => e.Description));
+        }
+        
 
         return (true, Array.Empty<string>());
     }

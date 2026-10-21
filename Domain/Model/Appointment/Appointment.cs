@@ -13,7 +13,7 @@ public class Appointment : BaseModel<int>
     public int ServiceId { get; private set; }
 
     // کاربری که رزرو کرده
-    public int UserId { get; private set; }
+    public string UserId { get; private set; }
 
     // تاریخ رزرو (مثلاً 1405/05/20)
     public DateOnly Date { get; private set; }
@@ -31,7 +31,7 @@ public class Appointment : BaseModel<int>
     private Appointment() { }
 
     // برای ساخت از بیرون کلاس، با اعتبارسنجی اولیه
-    public static Appointment Create(int timeSlotId, int serviceId, int userId, DateOnly date)
+    public static Appointment Create(int timeSlotId, int serviceId, string userId, DateOnly date)
     {
         return new Appointment
         {
