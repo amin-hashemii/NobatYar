@@ -18,8 +18,10 @@ builder.Services.AddPresentationServices();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
+builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
+    p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 var app = builder.Build();
-
+app.UseCors();
 await app.SeedDatabaseAsync();
 app.UseApplicationPipeline();
 

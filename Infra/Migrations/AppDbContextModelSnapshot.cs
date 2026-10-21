@@ -98,6 +98,54 @@ namespace Infra.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Model.Appointment.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatorUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime?>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("TimeSlotId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("TimeSlotId", "Date")
+                        .IsUnique()
+                        .HasFilter("[Status] <> 'Cancelled'");
+
+                    b.ToTable("Appointments", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Model.Category.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -177,6 +225,44 @@ namespace Infra.Migrations
                     b.ToTable("Providers");
                 });
 
+            modelBuilder.Entity("Domain.Model.Schedule.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatorUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DayOfWeek")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime?>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProviderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProviderId", "DayOfWeek")
+                        .IsUnique();
+
+                    b.ToTable("Schedules", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Model.Services.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -213,6 +299,48 @@ namespace Infra.Migrations
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("Domain.Model.TimeSlot.TimeSlot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatorUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime?>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduleId", "StartTime", "EndTime")
+                        .IsUnique();
+
+                    b.ToTable("TimeSlot", t =>
+                        {
+                            t.HasCheckConstraint("CK_TimeSlot_EndTime_After_StartTime", "[EndTime] > [StartTime]");
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -348,6 +476,33 @@ namespace Infra.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Model.Appointment.Appointment", b =>
+                {
+                    b.HasOne("Domain.Model.Services.Service", "Service")
+                        .WithMany("Appointments")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Model.TimeSlot.TimeSlot", "TimeSlot")
+                        .WithMany("Appointments")
+                        .HasForeignKey("TimeSlotId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Model.ApplicationUser", "User")
+                        .WithMany("Appointments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+
+                    b.Navigation("TimeSlot");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Model.Provider.Provider", b =>
                 {
                     b.HasOne("Domain.Model.ApplicationUser", null)
@@ -371,6 +526,17 @@ namespace Infra.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Model.Schedule.Schedule", b =>
+                {
+                    b.HasOne("Domain.Model.Provider.Provider", "Provider")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Provider");
+                });
+
             modelBuilder.Entity("Domain.Model.Services.Service", b =>
                 {
                     b.HasOne("Domain.Model.Provider.Provider", "provider")
@@ -380,6 +546,17 @@ namespace Infra.Migrations
                         .IsRequired();
 
                     b.Navigation("provider");
+                });
+
+            modelBuilder.Entity("Domain.Model.TimeSlot.TimeSlot", b =>
+                {
+                    b.HasOne("Domain.Model.Schedule.Schedule", "Schedule")
+                        .WithMany("TimeSlots")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -435,12 +612,34 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Model.ApplicationUser", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("Providers");
                 });
 
             modelBuilder.Entity("Domain.Model.Category.Category", b =>
                 {
                     b.Navigation("Providers");
+                });
+
+            modelBuilder.Entity("Domain.Model.Provider.Provider", b =>
+                {
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("Domain.Model.Schedule.Schedule", b =>
+                {
+                    b.Navigation("TimeSlots");
+                });
+
+            modelBuilder.Entity("Domain.Model.Services.Service", b =>
+                {
+                    b.Navigation("Appointments");
+                });
+
+            modelBuilder.Entity("Domain.Model.TimeSlot.TimeSlot", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 #pragma warning restore 612, 618
         }
